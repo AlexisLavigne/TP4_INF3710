@@ -1,6 +1,7 @@
 import { injectable } from "inversify";
 import * as pg from "pg";
 import "reflect-metadata";
+import { PlanRepas } from "../types";
 import { Production } from "../../../common/tables/Production";
 import { Variete } from "../../../common/tables/Variete";
 import { AdaptationTypeSolVariete } from '../../../common/tables/AdaptationTypeSolVariete';
@@ -9,7 +10,7 @@ import { AdaptationTypeSolVariete } from '../../../common/tables/AdaptationTypeS
 export class DatabaseService {
   public connectionConfig: pg.ConnectionConfig = {
     user: "postgres",
-    database: "TP4",
+    database: "tp4",
     password: "root",
     port: 5432,        // Warning: can also be 5433 for some users
     host: "127.0.0.1",
@@ -18,6 +19,48 @@ export class DatabaseService {
 
   public pool: pg.Pool = new pg.Pool(this.connectionConfig);
 
+  async getAllPlanRepas(): Promise<pg.QueryResult> {
+    const client = await this.pool.connect();
+    const queryText: string = 'SELECT * FROM "Planrepas";';
+    const res = await client.query(queryText);
+    client.release();
+    return res;
+  }
+
+  async getPlanRepas(id: number): Promise<pg.QueryResult> {
+    const client = await this.pool.connect();
+    const queryText: string = `SELECT * FROM "Planrepas" where numeroplan = ${id};`
+    const res = await client.query(queryText);
+    client.release();
+    return res;
+  }
+
+  async putPlanRepas(planrepas: PlanRepas): Promise<pg.QueryResult> {
+    const client = await this.pool.connect();
+    const values: string[] = [
+      planrepas.numeroplan.toString(),
+      planrepas.categorie,
+      planrepas.frequence.toString(),
+      planrepas.nbpersonnes.toString(),
+      planrepas.nbcalories.toString(),
+      planrepas.prix.toString(),
+      planrepas.numerofournisseur.toString()
+    ];
+    const queryText: string = `INSERT INTO "Planrepas" VALUES($1,$2,$3,$4,$5,$6,$7);`;
+    const res = await client.query(queryText, values);
+    client.release();
+
+    return res;
+  }
+
+  async deletePlanRepas(id: number): Promise<pg.QueryResult> {
+    const client = await this.pool.connect();
+    const queryText: string = `DELETE FROM "Planrepas" where numeroplan = ${id};`;
+    const res = await client.query(queryText);
+    client.release();
+
+    return res;
+  }
 
   // ======= JARDINS =======
   async getAllJardins(): Promise<pg.QueryResult> {

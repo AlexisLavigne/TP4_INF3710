@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import * as pg from "pg";
 import "reflect-metadata";
-import { PlanRepas } from "../types";
+import { PlanRepas } from "../../../common/tables/PlanRepas";
 import { Production } from "../../../common/tables/Production";
 import { Variete } from "../../../common/tables/Variete";
 import { AdaptationTypeSolVariete } from '../../../common/tables/AdaptationTypeSolVariete';

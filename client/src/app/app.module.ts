@@ -16,6 +16,7 @@ import { AddVarieteComponent } from "./varietes/add-variete.component";
 import { PendingQueryComponent } from "./varietes/pending-query.component";
 import { ModifyVarieteComponent } from "./varietes/modify-variete.component";
 import { DeleteVarieteComponent } from "./varietes/delete-variete.component";
+import { PlanRepasComponent } from './plan-repas/plan-repas.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DeleteVarieteComponent } from "./varietes/delete-variete.component";
     AddVarieteComponent,
     PendingQueryComponent,
     ModifyVarieteComponent,
-    DeleteVarieteComponent
+    DeleteVarieteComponent,
+    PlanRepasComponent
   ],
   imports: [
     CommonModule,

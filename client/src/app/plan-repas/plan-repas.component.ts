@@ -10,7 +10,7 @@ import { CommunicationService } from '../services/communication.service';
 })
 export class PlanRepasComponent implements OnInit {
   plansRepas: PlanRepas[];
-  displayedColumns: string[] = ['numeroplan', 'categorie', 'frequence', 'nbpersonnes', 'nbcalories', 'prix', 'numerofournisseur'];
+  displayedColumns: string[] = ['numeroplan', 'categorie', 'frequence', 'nbpersonnes', 'nbcalories', 'prix', 'numerofournisseur', 'delete', 'modify', 'add'];
 
   constructor(private readonly communicationService: CommunicationService) { }
 

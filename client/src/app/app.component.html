@@ -9,13 +9,6 @@
       </div>
     </div>
   </nav>
-
-  <div class="home" *ngIf="route == ''">
-    <p>
-      Bienvenue aux jardins communautaires du Plateau Mont-Royal
-    </p>
-    <button mat-raised-button color="primary" class="btn" routerLink="/jardins">Parcourir nos jardins...<mat-icon>arrow_right</mat-icon></button>
-  </div>
-
+  <app-plan-repas></app-plan-repas>
   <router-outlet></router-outlet>
 </div>

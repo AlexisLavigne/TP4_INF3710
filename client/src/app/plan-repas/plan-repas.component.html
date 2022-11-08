@@ -48,7 +48,7 @@
       <ng-container matColumnDef="add">
         <th mat-header-cell *matHeaderCellDef> Ajouter </th>
         <td mat-cell *matCellDef="let planrepas"> 
-          <button mat-raised-button class="circle-outline">
+          <button mat-raised-button (click)="openAddDialog()" class="circle-outline">
             <mat-icon fontIcon="add"></mat-icon>
           </button>
         </td>

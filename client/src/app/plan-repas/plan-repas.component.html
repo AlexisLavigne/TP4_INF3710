@@ -37,7 +37,7 @@
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef> Supprimer </th>
         <td mat-cell *matCellDef="let planrepas"> 
-          <button mat-raised-button class="circle-outline">
+          <button mat-raised-button (click)="openDeleteDialog(planrepas.numeroplan)" class="circle-outline">
             <mat-icon fontIcon="delete"></mat-icon>
           </button>
         </td>

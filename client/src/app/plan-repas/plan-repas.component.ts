@@ -3,6 +3,7 @@ import { PlanRepas } from '../../../../common/tables/PlanRepas';
 import { CommunicationService } from '../services/communication.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 
@@ -20,7 +21,8 @@ export class PlanRepasComponent implements OnInit {
   constructor(
     private readonly communicationService: CommunicationService,
     public addDialog: MatDialog,
-    public editDialog: MatDialog
+    public editDialog: MatDialog,
+    public deleteDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +56,17 @@ export class PlanRepasComponent implements OnInit {
   openEditDialog(id: number): void {
     this.communicationService.getPlanRepas(id).subscribe((planrepas: any) => {
       const dialogRef = this.addDialog.open(EditDialogComponent, {
+        width: '650px',
+        data: planrepas[0]
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.animal = result;
+      });
+    });
+  }
+  openDeleteDialog(id: number): void {
+    this.communicationService.getPlanRepas(id).subscribe((planrepas: any) => {
+      const dialogRef = this.addDialog.open(DeleteDialogComponent, {
         width: '650px',
         data: planrepas[0]
       });

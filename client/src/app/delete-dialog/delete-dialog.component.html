@@ -1,1 +1,17 @@
-<p>delete-dialog works!</p>
+<h1 mat-dialog-title>Voulez-vous supprimer le plan repas suivant</h1>
+<mat-card>
+    <mat-card-title>Numero de plan: {{data.numeroplan}}</mat-card-title>
+    <mat-card-content>
+        <p>Catégorie: {{data.categorie}}</p>
+        <p>Fréquence: {{data.frequence}}</p>
+        <p>Nombre de personnes: {{data.nbpersonnes}}</p>
+        <p>Nombre de calories: {{data.nbcalories}}</p>
+        <p>Prix ($) : {{data.prix}}</p>
+        <p>Numero de fournisseur: {{data.numerofournisseur}}</p>
+      </mat-card-content>
+  </mat-card>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button mat-button [mat-dialog-close]="data.categorie" cdkFocusInitial>Valider</button>
+</div>
+

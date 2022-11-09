@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 export interface DialogData {
@@ -17,9 +17,11 @@ export interface DialogData {
   styleUrls: ['./add-dialog.component.css']
 })
 export class AddDialogComponent {
-  @Input() numeroPlan: string;
 
-  constructor(public dialogRef: MatDialogRef<AddDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(
+    public dialogRef: MatDialogRef<AddDialogComponent>, 
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) { }
 
   
   onNoClick(): void {

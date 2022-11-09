@@ -1,1 +1,50 @@
-<p>edit-dialog works!</p>
+<h1 mat-dialog-title>Veuillez modifier les informations du plan repas</h1>
+<div mat-dialog-content>
+  <form>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Numéro de plan</mat-label>
+        <input matInput type="number" [(ngModel)]="data.numeroplan">
+      </mat-form-field>
+    </form>
+    <form>
+      <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Categorie</mat-label>
+          <input matInput #message maxlength="15" placeholder="Categorie" [(ngModel)]="data.categorie">
+          <mat-hint align="end">{{message.value.length}} / 15</mat-hint>
+      </mat-form-field>
+    </form>
+    <form>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Fréquence</mat-label>
+        <input matInput type="number" [(ngModel)]="data.frequence">
+      </mat-form-field>
+    </form>
+    <form>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nombre de personnes</mat-label>
+        <input matInput type="number" [(ngModel)]="data.nbpersonnes">
+      </mat-form-field>
+    </form>
+    <form>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nombre de calories</mat-label>
+        <input matInput type="number" [(ngModel)]="data.nbcalories">
+      </mat-form-field>
+    </form>
+    <form>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Prix ($)</mat-label>
+        <input matInput type="number" [(ngModel)]="data.prix">
+      </mat-form-field>
+    </form>
+    <form>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Numero de fournisseur</mat-label>
+        <input matInput type="number" [(ngModel)]="data.numerofournisseur">
+      </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button mat-button [mat-dialog-close]="data.categorie" cdkFocusInitial>Valider</button>
+</div>

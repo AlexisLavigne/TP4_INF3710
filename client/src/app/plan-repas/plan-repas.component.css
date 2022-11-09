@@ -35,6 +35,17 @@ table {
     font-weight: bold;
     text-shadow: 1px 1px #000;
   }
+
+  h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px;
+    padding-top: 2%;
+    padding-bottom: 1%;
+    text-align: center;
+    color: #9a75f0;
+    font-weight: bold;
+    text-shadow: 1px 1px #000;
+  }
   
   th {
     font-size: 17px;

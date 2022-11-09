@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlanRepas } from '../../../../common/tables/PlanRepas';
 import { CommunicationService } from '../services/communication.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 
@@ -14,18 +15,18 @@ export class PlanRepasComponent implements OnInit {
   name: string = 'Lolo';
   animal: string;
   plansRepas: PlanRepas[];
-  displayedColumns: string[] = ['numeroplan', 'categorie', 'frequence', 'nbpersonnes', 'nbcalories', 'prix', 'numerofournisseur', 'delete', 'modify', 'add'];
+  displayedColumns: string[] = ['numeroplan', 'categorie', 'frequence', 'nbpersonnes', 'nbcalories', 'prix', 'numerofournisseur', 'delete', 'modify'];
 
   constructor(
     private readonly communicationService: CommunicationService,
     public addDialog: MatDialog,
+    public editDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.getAllPlansRepas();
   }
   private getAllPlansRepas(): void {
-    console.log('test');
     this.communicationService.getAllPlansRepas().subscribe((plansrepas: any) => {
       console.log(plansrepas);
       this.plansRepas = plansrepas ? plansrepas: [];
@@ -37,7 +38,7 @@ export class PlanRepasComponent implements OnInit {
       width: '650px',
       data: {
         numeroplan: 1, 
-        categorie: "test", 
+        categorie: "miam", 
         frequence: 1, 
         nbpersonnes: 4, 
         nbcalories: 500,
@@ -47,6 +48,18 @@ export class PlanRepasComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.animal = result;
+    });
+  }
+
+  openEditDialog(id: number): void {
+    this.communicationService.getPlanRepas(id).subscribe((planrepas: any) => {
+      const dialogRef = this.addDialog.open(EditDialogComponent, {
+        width: '650px',
+        data: planrepas[0]
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.animal = result;
+      });
     });
   }
 }

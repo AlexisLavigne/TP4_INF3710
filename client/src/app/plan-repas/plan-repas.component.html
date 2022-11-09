@@ -1,5 +1,10 @@
 <div>
     <h1>Plans-Repas</h1>
+    <h2>Ajouter un plan: 
+      <button mat-raised-button (click)="openAddDialog()" class="circle-outline">
+        <mat-icon fontIcon="add"></mat-icon>
+      </button>
+    </h2>
     <table mat-table matSort [dataSource]="plansRepas" class="mat-elevation-z8">
       <ng-container matColumnDef="numeroplan">
         <th mat-header-cell *matHeaderCellDef> Numero de plan </th>
@@ -40,16 +45,8 @@
       <ng-container matColumnDef="modify">
         <th mat-header-cell *matHeaderCellDef> Modifier </th>
         <td mat-cell *matCellDef="let planrepas"> 
-          <button mat-raised-button class="circle-outline">
+          <button mat-raised-button (click)="openEditDialog(planrepas.numeroplan)" class="circle-outline">
             <mat-icon fontIcon="edit"></mat-icon>
-          </button>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="add">
-        <th mat-header-cell *matHeaderCellDef> Ajouter </th>
-        <td mat-cell *matCellDef="let planrepas"> 
-          <button mat-raised-button (click)="openAddDialog()" class="circle-outline">
-            <mat-icon fontIcon="add"></mat-icon>
           </button>
         </td>
       </ng-container>

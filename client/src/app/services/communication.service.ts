@@ -27,12 +27,19 @@ export class CommunicationService {
   filter(filterBy: string): void {
     this._listeners.next(filterBy);
   }
+  // =============================================================//
   getAllPlansRepas(): Observable<any> {
     return this.http
       .get<any>(this.BASE_URL + "/planrepas")
       .pipe(catchError(this.handleError<any>("getAllPlansRepas")));
   }
+  getPlanRepas(id: number): Observable<any> {
+    return this.http
+      .get<any>(this.BASE_URL + "/planrepas/" + id)
+      .pipe(catchError(this.handleError<any>("getPlanRepas")));
+  }
 
+  // =============================================================//
   // ======= JARDINS =======
   getAllJardins(): Observable<Jardin[]> {
     return this.http

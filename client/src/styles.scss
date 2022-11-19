@@ -5,9 +5,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 :root {
-    --theme-purple: #9A75F0;
+    --theme-purple: #3c39e9;
     --theme-purple-hover: #9A75F033;
-    --theme-purple-placeholder: #9A75F0BB;
+    --theme-purple-placeholder: rgb(6, 115, 216);
     --theme-blue: #6E9EEB;
     --theme-blue-hover: #6E9EEB33;
     --theme-blue-placeholder: #6E9EEBBB;
@@ -22,6 +22,6 @@
 }
 
 html {
-  background: url('../../imgs/bg.jpg') no-repeat;
+  background: url('../../imgs/bg.png') no-repeat;
   background-size: cover;
 }

@@ -30,7 +30,6 @@ export class PlanRepasComponent implements OnInit {
   }
   private getAllPlansRepas(): void {
     this.communicationService.getAllPlansRepas().subscribe((plansrepas: any) => {
-      console.log(plansrepas);
       this.plansRepas = plansrepas ? plansrepas: [];
     });
   };

@@ -3,32 +3,32 @@
   <form>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Numéro de plan</mat-label>
-        <input matInput type="number" [(ngModel)]="data.numeroplan">
+        <input matInput required min="1" type="number" [(ngModel)]="data.numeroplan">
       </mat-form-field>
     </form>
     <form>
       <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Categorie</mat-label>
           <input matInput #message maxlength="15" placeholder="Categorie" [(ngModel)]="data.categorie">
-          <mat-hint align="end">{{message.value.length}} / 15</mat-hint>
+          <mat-hint>{{message.value.length}} / 15</mat-hint>
       </mat-form-field>
     </form>
     <form>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Fréquence</mat-label>
-        <input matInput type="number" [(ngModel)]="data.frequence">
+        <input matInput type="number" min="1" [(ngModel)]="data.frequence">
       </mat-form-field>
     </form>
     <form>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Nombre de personnes</mat-label>
-        <input matInput type="number" [(ngModel)]="data.nbpersonnes">
+        <input matInput type="number" min="1" [(ngModel)]="data.nbpersonnes">
       </mat-form-field>
     </form>
     <form>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Nombre de calories</mat-label>
-        <input matInput type="number" [(ngModel)]="data.nbcalories">
+        <input matInput type="number" min="1" [(ngModel)]="data.nbcalories">
       </mat-form-field>
     </form>
     <form>
@@ -40,11 +40,11 @@
     <form>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Numero de fournisseur</mat-label>
-        <input matInput type="number" [(ngModel)]="data.numerofournisseur">
+        <input matInput required type="number" min="1" [(ngModel)]="data.numerofournisseur">
       </mat-form-field>
     </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Annuler</button>
-  <button mat-button [mat-dialog-close]="data.categorie" cdkFocusInitial>Valider</button>
+  <button mat-button [mat-dialog-close]="data.categorie" cdkFocusInitial (click)="editPlan()">Valider</button>
 </div>

@@ -49,7 +49,6 @@ export class DatabaseService {
     const queryText: string = `INSERT INTO "Planrepas" VALUES($1,$2,$3,$4,$5,$6,$7);`;
     const res = await client.query(queryText, values);
     client.release();
-
     return res;
   }
 
@@ -61,7 +60,26 @@ export class DatabaseService {
     const queryText: string = `DELETE FROM "Planrepas" where numeroplan = ${id};`;
     const res = await client.query(queryText);
     client.release();
+    return res;
+  }
 
+  public async editPlanRepas(plan: PlanRepas, id: number): Promise<pg.QueryResult> {
+    const client = await this.pool.connect();
+    // if (!variete.oldvarietename || !variete.anneemiseenmarche.toString().length || !variete.commentairegeneral.length || descriptions.length !== 3 || !variete.nom.length || !variete.periodemiseenplace.length || !variete.perioderecolte.length) {
+    //   throw new Error("Impossible de modifier la variété désirée.");
+    // }
+    const editedPlan: (string | number)[] = [
+      plan.numeroplan,
+      plan.categorie,
+      plan.frequence, 
+      plan.nbpersonnes,
+      plan.nbcalories, 
+      plan.prix,
+      plan.numerofournisseur
+    ];
+    const queryText: string = `UPDATE "Planrepas" SET numeroplan = $1, categorie = $2, frequence = $3, nbpersonnes = $4, nbcalories = $5, prix = $6, numerofournisseur = $7 WHERE numeroplan = ${id};`;
+    const res = await client.query(queryText, editedPlan);
+    client.release();
     return res;
   }
 

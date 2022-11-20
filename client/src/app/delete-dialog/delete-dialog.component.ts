@@ -28,8 +28,9 @@ export class DeleteDialogComponent {
   ) { this.numeroplan = data.numeroplan }
 
   deletePlan(): void {
-    this.communicationService.deletePlanRepas(this.numeroplan).subscribe((res: number) => {});
-    window.location.reload();
+    this.communicationService.deletePlanRepas(this.numeroplan).subscribe((res: number) => {
+      window.location.reload();
+    });
   }
 
   onNoClick(): void {

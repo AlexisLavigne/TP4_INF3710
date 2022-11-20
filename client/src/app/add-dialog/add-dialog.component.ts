@@ -28,13 +28,13 @@ export class AddDialogComponent {
 
   addPlan(): void {
     const newPlan : PlanRepas = {
-    numeroplan: this.data.numeroplan,
-    categorie: this.data.categorie,
-    frequence: this.data.frequence,
-    nbpersonnes: this.data.nbpersonnes,
-    nbcalories: this.data.nbcalories,
-    prix: this.data.prix,
-    numerofournisseur: this.data.numerofournisseur} 
+      numeroplan: this.data.numeroplan,
+      categorie: this.data.categorie,
+      frequence: this.data.frequence,
+      nbpersonnes: this.data.nbpersonnes,
+      nbcalories: this.data.nbcalories,
+      prix: this.data.prix,
+      numerofournisseur: this.data.numerofournisseur} 
     // a optimiser
     if (!this.data.numeroplan || !this.data.categorie || !this.data.frequence || !this.data.nbpersonnes || !this.data.nbcalories || !this.data.prix || !this.data.numerofournisseur || this.data.numeroplan < 0 || this.data.frequence < 0 || this.data.nbpersonnes < 0 || this.data.nbcalories < 0 || this.data.prix < 0 || this.data.numerofournisseur < 0) return;
     this.communicationService.getAllPlansRepas().subscribe((data: PlanRepas[]) => {
@@ -42,6 +42,7 @@ export class AddDialogComponent {
         if (plan.numeroplan == newPlan.numeroplan) return;
       this.communicationService.addPlanRepas(newPlan).subscribe((res: number) => {});
       window.location.reload();
+      // check si le fournisseur existe avant de send la req
     });
   }
 

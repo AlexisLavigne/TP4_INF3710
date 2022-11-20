@@ -30,11 +30,19 @@ export class DatabaseController {
     router.delete("/planrepas/:id", (req: Request, res: Response, _: NextFunction) => {
       if (req.params.id) this.databaseService.deletePlanRepas(Number(req.params.id)).then((result: pg.QueryResult) => res.json(result.rows));
     });
-    // gestion des erreurs : peut pas delete pq ya des trucs qui dépendent
     
     router.post("/planrepas/", (req: Request, res: Response, _: NextFunction) => {
       this.databaseService.addPlanRepas(req.body).then((result: pg.QueryResult) => res.json(result.rows));
     });
+
+    router.put("/planrepas/:id", (req: Request, res: Response, _: NextFunction) => {
+        this.databaseService.editPlanRepas(req.body, Number(req.params.id)).then((result: pg.QueryResult) => { res.json(result.rowCount);})
+          .catch((e: Error) => {
+            console.error(e.stack);
+            res.json(-1);
+          });
+      }
+    );
 
     // ======= JARDINS ROUTES =======
     router.get("/jardins/:id?", (req: Request, res: Response, _: NextFunction) => {

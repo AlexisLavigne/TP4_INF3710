@@ -22,13 +22,18 @@ export class DatabaseController {
   public get router(): Router {
     const router: Router = Router();
 
-    router.get("/test", (_req: Request, res: Response, _next: NextFunction) => {
-      res.send('la route test fonctionne');
-    });
-
     router.get("/planrepas/:id?", (req: Request, res: Response, _: NextFunction) => {
       if (req.params.id) this.databaseService.getPlanRepas(Number(req.params.id)).then((result: pg.QueryResult) => res.json(result.rows));
       else this.databaseService.getAllPlanRepas().then((result: pg.QueryResult) => res.json(result.rows));
+    });
+
+    router.delete("/planrepas/:id", (req: Request, res: Response, _: NextFunction) => {
+      if (req.params.id) this.databaseService.deletePlanRepas(Number(req.params.id)).then((result: pg.QueryResult) => res.json(result.rows));
+    });
+    // gestion des erreurs : peut pas delete pq ya des trucs qui dépendent
+    
+    router.post("/planrepas/", (req: Request, res: Response, _: NextFunction) => {
+      this.databaseService.addPlanRepas(req.body).then((result: pg.QueryResult) => res.json(result.rows));
     });
 
     // ======= JARDINS ROUTES =======

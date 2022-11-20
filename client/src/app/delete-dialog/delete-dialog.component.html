@@ -12,6 +12,6 @@
   </mat-card>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Annuler</button>
-  <button mat-button [mat-dialog-close]="data.categorie" cdkFocusInitial>Valider</button>
+  <button mat-button [mat-dialog-close]="data.categorie" cdkFocusInitial (click)="deletePlan()">Valider</button>
 </div>
 

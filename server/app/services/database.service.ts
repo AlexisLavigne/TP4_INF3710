@@ -35,7 +35,7 @@ export class DatabaseService {
     return res;
   }
 
-  async putPlanRepas(planrepas: PlanRepas): Promise<pg.QueryResult> {
+  async addPlanRepas(planrepas: PlanRepas): Promise<pg.QueryResult> {
     const client = await this.pool.connect();
     const values: string[] = [
       planrepas.numeroplan.toString(),
@@ -55,7 +55,11 @@ export class DatabaseService {
 
   async deletePlanRepas(id: number): Promise<pg.QueryResult> {
     const client = await this.pool.connect();
+    if (!id) {
+      throw new Error("Impossible de supprimer le plan repas désiré.");
+    }
     const queryText: string = `DELETE FROM "Planrepas" where numeroplan = ${id};`;
+    console.log("connnnect")
     const res = await client.query(queryText);
     client.release();
 

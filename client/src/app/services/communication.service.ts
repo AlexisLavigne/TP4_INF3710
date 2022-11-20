@@ -11,7 +11,7 @@ import { Variete } from '../../../../common/tables/Variete';
 import { Semencier } from '../../../../common/tables/Semencier';
 import { AdaptationTypeSolVariete } from '../../../../common/tables/AdaptationTypeSolVariete';
 import { Production } from '../../../../common/tables/Production';
-// import { PlanRepas } from '../../../../common/tables/PlanRepas';
+import { DialogData } from "../add-dialog/add-dialog.component";
 
 @Injectable()
 export class CommunicationService {
@@ -37,6 +37,20 @@ export class CommunicationService {
     return this.http
       .get<any>(this.BASE_URL + "/planrepas/" + id)
       .pipe(catchError(this.handleError<any>("getPlanRepas")));
+  }
+
+  deletePlanRepas(id: number): Observable<any> {
+    console.log(id);
+    return this.http
+      .delete<any>(this.BASE_URL + "/planrepas/" + id)
+      .pipe(catchError(this.handleError<any>("deletePlanRepas")));
+  }
+
+  addPlanRepas(newPlan: DialogData){
+    // faire verif si numeroplan existe deja, sinon server va crash
+    return this.http
+      .post<any>(this.BASE_URL + "/planrepas/", newPlan)
+      .pipe(catchError(this.handleError<any>("deletePlanRepas")));
   }
 
   // =============================================================//

@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { PlanRepas } from '../../../../common/tables/PlanRepas';
 import { CommunicationService } from '../services/communication.service';
 
 export interface DialogData {
-  numeroplan?: number;
+  numeroplan: number; // pk yavait un ?, on veux tjrs en avoir non? ou tu las mis pour que serial ferait la job?
   categorie: string;
   frequence: number;
   nbpersonnes: number;
@@ -18,7 +19,7 @@ export interface DialogData {
   styleUrls: ['./add-dialog.component.css']
 })
 export class AddDialogComponent {
-    
+
   constructor(
     public dialogRef: MatDialogRef<AddDialogComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -26,19 +27,26 @@ export class AddDialogComponent {
   ) {}
 
   addPlan(): void {
-    const newPlan : DialogData = {numeroplan: this.data.numeroplan,
+    const newPlan : PlanRepas = {
+    numeroplan: this.data.numeroplan,
     categorie: this.data.categorie,
     frequence: this.data.frequence,
     nbpersonnes: this.data.nbpersonnes,
     nbcalories: this.data.nbcalories,
     prix: this.data.prix,
-    numerofournisseur: this.data.numerofournisseur}
-
-    console.log(newPlan);
-    this.communicationService.addPlanRepas(newPlan).subscribe((res: number) => {});
+    numerofournisseur: this.data.numerofournisseur} 
+    // a optimiser
+    if (!this.data.numeroplan || !this.data.categorie || !this.data.frequence || !this.data.nbpersonnes || !this.data.nbcalories || !this.data.prix || !this.data.numerofournisseur || this.data.numeroplan < 0 || this.data.frequence < 0 || this.data.nbpersonnes < 0 || this.data.nbcalories < 0 || this.data.prix < 0 || this.data.numerofournisseur < 0) return;
+    this.communicationService.getAllPlansRepas().subscribe((data: PlanRepas[]) => {
+      for (let plan of data)
+        if (plan.numeroplan == newPlan.numeroplan) return;
+      this.communicationService.addPlanRepas(newPlan).subscribe((res: number) => {});
+      window.location.reload();
+    });
   }
-  
+
   onNoClick(): void {
     this.dialogRef.close();
   }
+
 }

@@ -21,7 +21,7 @@ export class DatabaseService {
 
   async getAllPlanRepas(): Promise<pg.QueryResult> {
     const client = await this.pool.connect();
-    const queryText: string = 'SELECT * FROM "Planrepas";';
+    const queryText: string = 'SELECT * FROM "Planrepas" ORDER BY numeroplan asc;';
     const res = await client.query(queryText);
     client.release();
     return res;

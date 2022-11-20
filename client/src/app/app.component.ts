@@ -20,6 +20,6 @@ export class AppComponent implements OnInit {
           });
     }
 
-    public readonly title: string = "POSTGRESQL INTEGRATION";
+    public readonly title: string = "Plan repas";
     public ngOnInit(): void { }
 }

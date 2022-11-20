@@ -59,7 +59,6 @@ export class DatabaseService {
       throw new Error("Impossible de supprimer le plan repas désiré.");
     }
     const queryText: string = `DELETE FROM "Planrepas" where numeroplan = ${id};`;
-    console.log("connnnect")
     const res = await client.query(queryText);
     client.release();
 

@@ -5,22 +5,6 @@ table {
     padding: 0;
   }
   
-  .o-color {
-    color: #ffa90a;
-  }
-  
-  .v-color {
-    color: #667a67;
-  }
-  
-  .p-color {
-    color: #ec5732;
-  }
-  
-  .circle-outline {
-    background: #f2edfd;
-  }
-  
   .circle-inline {
     color: rgb(6, 115, 216);
   }

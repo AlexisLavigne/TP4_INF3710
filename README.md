@@ -1,4 +1,4 @@
-# Integration PostgreSQL pour un site web qui fournit des plana repas
+# Integration PostgreSQL pour un site web qui fournit des plans repas
 
 ## Description:
 Application Web avec Angular qui intègre PostgreSQL.

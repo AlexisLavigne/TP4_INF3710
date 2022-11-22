@@ -1,6 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { PlanRepas } from '../../../../common/tables/PlanRepas';
+import { Fournisseur } from '../../../../common/tables/Fournisseur';
 import { CommunicationService } from '../services/communication.service';
 
 export interface DialogData {
@@ -18,13 +19,22 @@ export interface DialogData {
   templateUrl: './add-dialog.component.html',
   styleUrls: ['./add-dialog.component.css']
 })
-export class AddDialogComponent {
+export class AddDialogComponent implements OnInit {
+  fournisseurs: number[];
 
   constructor(
     public dialogRef: MatDialogRef<AddDialogComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private readonly communicationService : CommunicationService
   ) {}
+
+  ngOnInit(): void {
+    this.fournisseurs = [];
+    this.communicationService.getAllFournisseurs().subscribe((fournisseurs: Fournisseur[]) => {
+      for (let fournisseur of fournisseurs)
+        this.fournisseurs.push(fournisseur.numerofournisseur);
+    });
+  }
 
   addPlan(): void {
     const newPlan : PlanRepas = {
@@ -42,7 +52,6 @@ export class AddDialogComponent {
         if (plan.numeroplan == newPlan.numeroplan) return;
       this.communicationService.addPlanRepas(newPlan).subscribe((res: number) => {});
       window.location.reload();
-      // check si le fournisseur existe avant de send la req
     });
   }
 

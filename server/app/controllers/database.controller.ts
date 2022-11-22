@@ -44,6 +44,10 @@ export class DatabaseController {
       }
     );
 
+    router.get("/fournisseurs", (req: Request, res: Response, _: NextFunction) => {
+      this.databaseService.getAllFournisseurs().then((result: pg.QueryResult) => res.json(result.rows));
+    });
+
     // ======= JARDINS ROUTES =======
     router.get("/jardins/:id?", (req: Request, res: Response, _: NextFunction) => {
       if(req.params.id) {

@@ -40,7 +40,11 @@
     <form>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Numero de fournisseur</mat-label>
-        <input matInput required type="number" min="1" [(ngModel)]="data.numerofournisseur">
+        <mat-select>
+          <mat-option *ngFor="let fournisseur of fournisseurs" [value]="fournisseur">
+            {{fournisseur}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </form>
 </div>

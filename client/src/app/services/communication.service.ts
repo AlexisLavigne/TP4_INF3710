@@ -34,6 +34,7 @@ export class CommunicationService {
       .get<any>(this.BASE_URL + "/planrepas")
       .pipe(catchError(this.handleError<any>("getAllPlansRepas")));
   }
+
   getPlanRepas(id: number): Observable<any> {
     return this.http
       .get<any>(this.BASE_URL + "/planrepas/" + id)
@@ -58,6 +59,12 @@ export class CommunicationService {
     return this.http
       .put<number>(this.BASE_URL + "/planrepas/" + id, newPlan)
       .pipe(catchError(this.handleError<number>("editPlanRepas")));
+  }
+
+  getAllFournisseurs(): Observable<any> {
+    return this.http
+      .get<any>(this.BASE_URL + "/fournisseurs")
+      .pipe(catchError(this.handleError<any>("getAllFournisseurs")));
   }
 
   // =============================================================//

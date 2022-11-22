@@ -83,6 +83,14 @@ export class DatabaseService {
     return res;
   }
 
+  async getAllFournisseurs(): Promise<pg.QueryResult> {
+    const client = await this.pool.connect();
+    const queryText: string = 'SELECT * FROM "Fournisseur";';
+    const res = await client.query(queryText);
+    client.release();
+    return res;
+  }
+
   // ======= JARDINS =======
   async getAllJardins(): Promise<pg.QueryResult> {
     const client = await this.pool.connect();

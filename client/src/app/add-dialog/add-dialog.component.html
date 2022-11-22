@@ -16,13 +16,21 @@
     <form>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Fréquence</mat-label>
-        <input matInput type="number" min="1" [(ngModel)]="data.frequence">
+        <mat-select [(ngModel)]="data.frequence">
+          <mat-option *ngFor="let frequence of frequences" [value]="frequence">
+            {{frequence}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </form>
     <form>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Nombre de personnes</mat-label>
-        <input matInput type="number" min="1" [(ngModel)]="data.nbpersonnes">
+        <mat-select [(ngModel)]="data.nbpersonnes">
+          <mat-option *ngFor="let nbpersonne of nbpersonnes" [value]="nbpersonne">
+            {{nbpersonne}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </form>
     <form>
@@ -39,8 +47,8 @@
     </form>
     <form>
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Numero de fournisseur</mat-label>
-        <mat-select>
+        <mat-label>Fournisseur</mat-label>
+        <mat-select [(ngModel)]="data.numerofournisseur">
           <mat-option *ngFor="let fournisseur of fournisseurs" [value]="fournisseur">
             {{fournisseur}}
           </mat-option>

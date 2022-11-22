@@ -1,42 +1,20 @@
-# POSTGRESQL_INTEGRATION
+# Integration PostgreSQL pour un site web qui fournit des plana repas
 
-## [FR] Description:
+## Description:
+Application Web avec Angular qui intègre PostgreSQL.
+- Il est possible de visualiser tous les plans repas disponibles.
+- Il est possible de supprimer des plans repas.
+- Il est possible de modifier des plans repas.
+- Il est possible d'ajouter des plans repas.
 
-- Application Web avec Angular qui intègre PostgreSQL.
+## Auteurs:
+- Laurent Faucher #2074871
+- Alexis Lavigne #2074915
 
-## [EN] Description:
+## Spécifications: 
+- Les trois pages (ajouter, supprimer, modifier) sont représentées par des modales.
+- Lorsque l'utilisateur veut ajouter ou modifier un plan, le numéro de plan (numeroplan) n'est pas demandé puisque la base de données utilise serial (incrémentation automatique).
+- Lorsque l'utilisateur veut modifier un plan, il peut choisir une catégorie déjà existante dans le menu déroulant. Par contre, pour ajouter un nouveau plan, il n'y a pas de menu déroulant, car on considère que l'utilisateur peut ajouter une catégorie.
+- Pour la colonne frequence, on considère que cette valeur peut aller de 1 à 7 puisqu'on considère un seul repas par jour pendant une semaine (7 maximum). Le choix est disponible dans un menu déroulant.
+- Pour la colonne nbpersonnes, nous avons imposé une limite de 5 personnes, l'utilisateur à la possibilité de choisir une valeur entre 1 et 5 dans le menu déroulant.
 
-- Angular web app integrating PostgreSQL.
-
-## Auteurs / Authors:
-- Charles De Lafontaine
-- Geneviève Pelletier-Mc Duff
-- Thierry Beaulieu
-
-## [FR] Contributions:
-- **Charles De Lafontaine:** créateur de l'application web (front-end + backend), créateur du schéma de la base de données
-- **Geneviève Pelletier-Mc Duff:** codage par les pairs, revue du code, du schéma et de la population de la BD
-- **Thierry Beaulieu:** revue du schéma et de la population de la BD
-
-## [EN] Contributions:
-- **Charles De Lafontaine:** creator of the web application (front-end + backend), creator of the database schema
-- **Geneviève Pelletier-Mc Duff:** peer coding, review of the code, schema, and DB population
-- **Thierry Beaulieu:** review of the schema, and DB population
-
-## [FR] Pour utiliser l'application...
-- Assurez-vous d'avoir installé PostgreSQL (la version ~8.2 est utilisée pour ce projet).
-- Assurez-vous d'avoir installé Node (la version ^16 est utilisée pour ce projet).
-- Allez dans `/client` et lancez la commande `npm install` dans un terminal.
-- Allez dans `/server` et lancez la commande `npm install` dans un terminal.
-- Allez dans `/server/app/services/database.service.ts` et modifiez `connectionConfig` avec les bons paramètres de votre BD.
-- Allez dans `/server` et faites la commande `npm start` dans un terminal. Le serveur est lancé au `localhost:3000` par défaut.
-- Allez dans `/client` et faites la commande `npm start` dans un terminal. Le client est lancé au `localhost:4200` par défaut.
-
-## [EN] To use this app...
-- Be sure to have PostgreSQL installed (version ~8.2 is used for this project).
-- Be sure to have Node installed (version ^16 is used for this project).
-- Go to `/client` and type `npm install` in a terminal.
-- Go to `/server` and type `npm install` in a terminal.
-- Go to `/server/app/services/database.service.ts`, and modify `connectionConfig` with your database settings.
-- Go to `/server` and type `npm start` in a terminal. Server is active on `localhost:3000` by default.
-- Go to `/client` and type `npm start` in a terminal. Client is active on `localhost:4200` by default.

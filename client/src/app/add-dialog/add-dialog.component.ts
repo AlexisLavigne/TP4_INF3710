@@ -5,7 +5,7 @@ import { Fournisseur } from '../../../../common/tables/Fournisseur';
 import { CommunicationService } from '../services/communication.service';
 
 export interface DialogData {
-  numeroplan: number; // pk yavait un ?, on veux tjrs en avoir non? ou tu las mis pour que serial ferait la job?
+  numeroplan: number;
   categorie: string;
   frequence: number;
   nbpersonnes: number;
@@ -20,7 +20,9 @@ export interface DialogData {
   styleUrls: ['./add-dialog.component.css']
 })
 export class AddDialogComponent implements OnInit {
-  fournisseurs: number[];
+  fournisseurs: string[];
+  nbpersonnes: number[] = [1, 2, 3, 4, 5];
+  frequences: number[] = [1, 2, 3, 4, 5, 6, 7];
 
   constructor(
     public dialogRef: MatDialogRef<AddDialogComponent>, 
@@ -32,7 +34,7 @@ export class AddDialogComponent implements OnInit {
     this.fournisseurs = [];
     this.communicationService.getAllFournisseurs().subscribe((fournisseurs: Fournisseur[]) => {
       for (let fournisseur of fournisseurs)
-        this.fournisseurs.push(fournisseur.numerofournisseur);
+        this.fournisseurs.push(fournisseur.numerofournisseur + " - " + fournisseur.nomfournisseur);
     });
   }
 
@@ -44,9 +46,9 @@ export class AddDialogComponent implements OnInit {
       nbpersonnes: this.data.nbpersonnes,
       nbcalories: this.data.nbcalories,
       prix: this.data.prix,
-      numerofournisseur: this.data.numerofournisseur} 
+      numerofournisseur: Number(this.data.numerofournisseur.toString()[0])} 
     // a optimiser
-    if (!this.data.numeroplan || !this.data.categorie || !this.data.frequence || !this.data.nbpersonnes || !this.data.nbcalories || !this.data.prix || !this.data.numerofournisseur || this.data.numeroplan < 0 || this.data.frequence < 0 || this.data.nbpersonnes < 0 || this.data.nbcalories < 0 || this.data.prix < 0 || this.data.numerofournisseur < 0) return;
+    if (!this.data.categorie || !this.data.frequence || !this.data.nbpersonnes || !this.data.nbcalories || !this.data.prix || !this.data.numerofournisseur || this.data.nbcalories < 0 || this.data.prix < 0) return;
     this.communicationService.getAllPlansRepas().subscribe((data: PlanRepas[]) => {
       for (let plan of data)
         if (plan.numeroplan == newPlan.numeroplan) return;

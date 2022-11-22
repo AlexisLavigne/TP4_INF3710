@@ -21,7 +21,10 @@ export interface DialogData {
 })
 export class EditDialogComponent implements OnInit {
   public oldId = this.data.numeroplan;
-  fournisseurs: number[];
+  fournisseurs: string[];
+  categories: string[];
+  nbpersonnes: number[] = [1, 2, 3, 4, 5];
+  frequences: number[] = [1, 2, 3, 4, 5, 6, 7];
 
   constructor(
     public dialogRef: MatDialogRef<EditDialogComponent>, 
@@ -31,26 +34,31 @@ export class EditDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.fournisseurs = [];
+    this.categories = [];
     this.communicationService.getAllFournisseurs().subscribe((fournisseurs: Fournisseur[]) => {
       for (let fournisseur of fournisseurs)
-        this.fournisseurs.push(fournisseur.numerofournisseur);
+        this.fournisseurs.push(fournisseur.numerofournisseur + " - " + fournisseur.nomfournisseur);
+    });
+    this.communicationService.getAllPlansRepas().subscribe((plans: PlanRepas[]) => {
+      for (let plan of plans) if (!(this.categories.includes(plan.categorie))) this.categories.push(plan.categorie);
     });
   }
 
   editPlan(): void {
-    const newPlan : PlanRepas = {
+    const editedPlan: PlanRepas = {
       numeroplan: this.data.numeroplan,
       categorie: this.data.categorie,
       frequence: this.data.frequence,
       nbpersonnes: this.data.nbpersonnes,
       nbcalories: this.data.nbcalories,
       prix: this.data.prix,
-      numerofournisseur: this.data.numerofournisseur} 
+      numerofournisseur: Number(this.data.numerofournisseur.toString()[0])} 
     // a optimiser
-    if (!this.data.numeroplan || !this.data.categorie || !this.data.frequence || !this.data.nbpersonnes || !this.data.nbcalories || !this.data.prix || !this.data.numerofournisseur || this.data.numeroplan < 0 || this.data.frequence < 0 || this.data.nbpersonnes < 0 || this.data.nbcalories < 0 || this.data.prix < 0 || this.data.numerofournisseur < 0) return;
+    if (!this.data.categorie || !this.data.frequence || !this.data.nbpersonnes || !this.data.nbcalories || !this.data.prix || !this.data.numerofournisseur || this.data.nbcalories < 0 || this.data.prix < 0) return;
     this.communicationService.getAllPlansRepas().subscribe((data: PlanRepas[]) => {
-      if (newPlan.numeroplan != this.oldId) for (let plan of data) if (plan.numeroplan == newPlan.numeroplan) return;
-      this.communicationService.editPlanRepas(newPlan, this.oldId).subscribe((res: number) => {});
+      if (editedPlan.numeroplan != this.oldId) for (let plan of data) if (plan.numeroplan == editedPlan.numeroplan) return;
+      this.communicationService.editPlanRepas(editedPlan, this.oldId).subscribe((res: number) => {});
+      console.log(editedPlan);
       window.location.reload();
     });
   }

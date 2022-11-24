@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { PlanRepas } from '../../../../common/tables/PlanRepas';
 import { Fournisseur } from '../../../../common/tables/Fournisseur';
 import { CommunicationService } from '../services/communication.service';
+import { SnackBarComponent } from '../snack-bar/snack-bar.component';
 
 export interface DialogData {
   numeroplan: number;
@@ -23,11 +24,13 @@ export class AddDialogComponent implements OnInit {
   fournisseurs: string[];
   nbpersonnes: number[] = [1, 2, 3, 4, 5];
   frequences: number[] = [1, 2, 3, 4, 5, 6, 7];
+  message: string = "En attente de la reponse du serveur";
 
   constructor(
-    public dialogRef: MatDialogRef<AddDialogComponent>, 
+    public dialogRef: MatDialogRef<AddDialogComponent>,
+    public snackBar: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private readonly communicationService : CommunicationService
+    private readonly communicationService : CommunicationService,
   ) {}
 
   ngOnInit(): void {
@@ -46,14 +49,20 @@ export class AddDialogComponent implements OnInit {
       nbpersonnes: this.data.nbpersonnes,
       nbcalories: this.data.nbcalories,
       prix: this.data.prix,
-      numerofournisseur: Number(this.data.numerofournisseur.toString()[0])} 
-    // a optimiser
+      numerofournisseur: Number(this.data.numerofournisseur.toString()[0])
+    } 
     if (!this.data.categorie || !this.data.frequence || !this.data.nbpersonnes || !this.data.nbcalories || !this.data.prix || !this.data.numerofournisseur || this.data.nbcalories < 0 || this.data.prix < 0) return;
     this.communicationService.getAllPlansRepas().subscribe((data: PlanRepas[]) => {
-      for (let plan of data)
-        if (plan.numeroplan == newPlan.numeroplan) return;
-      this.communicationService.addPlanRepas(newPlan).subscribe((res: number) => {});
-      window.location.reload();
+      this.communicationService.addPlanRepas(newPlan).subscribe((res: any) => {
+        console.log(res);
+        this.message = res.message,
+        this.snackBar.open(SnackBarComponent, {
+          width: '400px',
+          data: {
+            message: this.message,
+          }
+        });
+      });
     });
   }
 

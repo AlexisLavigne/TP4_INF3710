@@ -6,7 +6,6 @@ import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
-
 @Component({
   selector: 'app-plan-repas',
   templateUrl: './plan-repas.component.html',

@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { Fournisseur } from '../../../../common/tables/Fournisseur';
 import { PlanRepas } from '../../../../common/tables/PlanRepas';
 import { CommunicationService } from '../services/communication.service';
+import { SnackBarComponent } from '../snack-bar/snack-bar.component';
 
 export interface DialogData {
   numeroplan: number;
@@ -27,7 +28,8 @@ export class EditDialogComponent implements OnInit {
   frequences: number[] = [1, 2, 3, 4, 5, 6, 7];
 
   constructor(
-    public dialogRef: MatDialogRef<EditDialogComponent>, 
+    public dialogRef: MatDialogRef<EditDialogComponent>,
+    public snackBar: MatDialog, 
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private readonly communicationService : CommunicationService
   ) { }
@@ -56,10 +58,15 @@ export class EditDialogComponent implements OnInit {
     // a optimiser
     if (!this.data.categorie || !this.data.frequence || !this.data.nbpersonnes || !this.data.nbcalories || !this.data.prix || !this.data.numerofournisseur || this.data.nbcalories < 0 || this.data.prix < 0) return;
     this.communicationService.getAllPlansRepas().subscribe((data: PlanRepas[]) => {
-      if (editedPlan.numeroplan != this.oldId) for (let plan of data) if (plan.numeroplan == editedPlan.numeroplan) return;
-      this.communicationService.editPlanRepas(editedPlan, this.oldId).subscribe((res: number) => {});
-      console.log(editedPlan);
-      window.location.reload();
+      this.communicationService.editPlanRepas(editedPlan, this.oldId).subscribe((res: any) => {
+        console.log(res);
+        this.snackBar.open(SnackBarComponent, {
+          width: '400px',
+          data: {
+            message: res.message ? res.message: 'Le plan a été modifié avec succès',
+          }
+        });
+      });
     });
   }
 

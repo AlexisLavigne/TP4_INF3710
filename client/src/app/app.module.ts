@@ -20,6 +20,7 @@ import { PlanRepasComponent } from './plan-repas/plan-repas.component';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
     PlanRepasComponent,
     AddDialogComponent,
     DeleteDialogComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    SnackBarComponent
   ],
   imports: [
     CommonModule,

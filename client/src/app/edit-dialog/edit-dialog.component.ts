@@ -63,7 +63,7 @@ export class EditDialogComponent implements OnInit {
         this.snackBar.open(SnackBarComponent, {
           width: '400px',
           data: {
-            message: res.message ? res.message: 'Le plan a été modifié avec succès',
+            message: res.message ? res.message: 'Le plan a bien été modifié!',
           }
         });
       });

@@ -38,7 +38,6 @@ export class DatabaseService {
   async addPlanRepas(planrepas: PlanRepas): Promise<pg.QueryResult> {
     const client = await this.pool.connect();
     const values: string[] = [
-      planrepas.numeroplan.toString(),
       planrepas.categorie,
       planrepas.frequence.toString(),
       planrepas.nbpersonnes.toString(),
@@ -46,7 +45,7 @@ export class DatabaseService {
       planrepas.prix.toString(),
       planrepas.numerofournisseur.toString()
     ];
-    const queryText: string = `INSERT INTO "Planrepas" VALUES($1,$2,$3,$4,$5,$6,$7);`;
+    const queryText: string = `INSERT INTO "Planrepas" VALUES(DEFAULT,$1,$2,$3,$4,$5,$6);`;
     const res = await client.query(queryText, values);
     client.release();
     return res;

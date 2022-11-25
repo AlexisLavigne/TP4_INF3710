@@ -71,7 +71,7 @@ export class EditDialogComponent implements OnInit {
     this.communicationService.getAllPlansRepas().subscribe((data: PlanRepas[]) => {
       this.communicationService.editPlanRepas(editedPlan, this.oldId).subscribe((res: any) => {
         console.log(res);
-        this.openSnackBar(res.message ? res.message: 'Le plan a été modifié avec succès');
+        this.openSnackBar(res.message ? res.message: 'Le plan a été modifié avec succès!');
       });
     });
   }

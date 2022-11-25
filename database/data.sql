@@ -1,8 +1,7 @@
 /**************************************************************
 	data.sql
-	Charles De Lafontaine 
-	Geneviève Pelletier-Mc Duff 
-	Thierry Beaulieu
+	Alexis Lavigne
+	Laurent Faucher
 **************************************************************/
 
 SET search_path = jardinCommMR;

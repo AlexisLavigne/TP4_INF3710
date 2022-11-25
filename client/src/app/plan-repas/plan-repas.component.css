@@ -41,3 +41,7 @@ table {
     vertical-align: middle !important;
     font-family: 'Roboto', sans-serif;
   }
+
+.plan {
+  background: url('../../../../imgs/bg.jpg');
+}

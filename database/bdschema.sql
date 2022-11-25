@@ -1,8 +1,7 @@
 /**************************************************************
 	bdschema.sql
-	Charles De Lafontaine 
-	Geneviève Pelletier-Mc Duff 
-	Thierry Beaulieu
+	Alexis Lavigne
+	Laurent Faucher
 **************************************************************/
 
 DROP SCHEMA IF EXISTS jardinCommMR CASCADE;

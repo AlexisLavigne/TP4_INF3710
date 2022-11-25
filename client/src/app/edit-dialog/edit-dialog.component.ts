@@ -45,6 +45,14 @@ export class EditDialogComponent implements OnInit {
       for (let plan of plans) if (!(this.categories.includes(plan.categorie))) this.categories.push(plan.categorie);
     });
   }
+  openSnackBar(message: string): void {
+    this.snackBar.open(SnackBarComponent, {
+      width: '400px',
+      data: {
+        message: message,
+      }
+    });
+  }
 
   editPlan(): void {
     const editedPlan: PlanRepas = {
@@ -54,18 +62,16 @@ export class EditDialogComponent implements OnInit {
       nbpersonnes: this.data.nbpersonnes,
       nbcalories: this.data.nbcalories,
       prix: this.data.prix,
-      numerofournisseur: Number(this.data.numerofournisseur.toString()[0])} 
-    // a optimiser
-    if (!this.data.categorie || !this.data.frequence || !this.data.nbpersonnes || !this.data.nbcalories || !this.data.prix || !this.data.numerofournisseur || this.data.nbcalories < 0 || this.data.prix < 0) return;
+      numerofournisseur: Number(this.data.numerofournisseur.toString()[0])
+    } 
+    if (this.data.nbcalories < 0 || this.data.prix < 0) {
+      this.openSnackBar("Vous ne pouvez pas rentrer de valeur négative. Veuillez réessayer.");
+      return;
+    }
     this.communicationService.getAllPlansRepas().subscribe((data: PlanRepas[]) => {
       this.communicationService.editPlanRepas(editedPlan, this.oldId).subscribe((res: any) => {
         console.log(res);
-        this.snackBar.open(SnackBarComponent, {
-          width: '400px',
-          data: {
-            message: res.message ? res.message: 'Le plan a été modifié avec succès',
-          }
-        });
+        this.openSnackBar(res.message ? res.message: 'Le plan a été modifié avec succès');
       });
     });
   }

@@ -40,7 +40,14 @@ export class AddDialogComponent implements OnInit {
         this.fournisseurs.push(fournisseur.numerofournisseur + " - " + fournisseur.nomfournisseur);
     });
   }
-
+  openSnackBar(message: string): void {
+    this.snackBar.open(SnackBarComponent, {
+      width: '400px',
+      data: {
+        message: message,
+      }
+    });
+  }
   addPlan(): void {
     const newPlan : PlanRepas = {
       numeroplan: this.data.numeroplan,
@@ -51,17 +58,15 @@ export class AddDialogComponent implements OnInit {
       prix: this.data.prix,
       numerofournisseur: Number(this.data.numerofournisseur.toString()[0])
     } 
-    if (!this.data.categorie || !this.data.frequence || !this.data.nbpersonnes || !this.data.nbcalories || !this.data.prix || !this.data.numerofournisseur || this.data.nbcalories < 0 || this.data.prix < 0) return;
+    if (this.data.nbcalories < 0 || this.data.prix < 0) {
+      this.openSnackBar("Vous ne pouvez pas rentrer de valeur négative. Veuillez réessayer.");
+      return;
+    }
     this.communicationService.getAllPlansRepas().subscribe((data: PlanRepas[]) => {
       this.communicationService.addPlanRepas(newPlan).subscribe((res: any) => {
         console.log(res);
-        this.message = res.message,
-        this.snackBar.open(SnackBarComponent, {
-          width: '400px',
-          data: {
-            message: this.message,
-          }
-        });
+        this.message = res.message;
+        this.openSnackBar(res.message);
       });
     });
   }

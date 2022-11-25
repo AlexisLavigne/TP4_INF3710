@@ -28,18 +28,29 @@ export class DatabaseController {
     });
 
     router.delete("/planrepas/:id", (req: Request, res: Response, _: NextFunction) => {
-      if (req.params.id) this.databaseService.deletePlanRepas(Number(req.params.id)).then((result: pg.QueryResult) => res.json(result.rows));
+      if (req.params.id) this.databaseService.deletePlanRepas(Number(req.params.id))
+        .then(() => res.json({message: 'Le plan à bien été supprimer'}))
+        .catch((e: Error) => {
+          console.log(e.message);
+          res.json({message: e.message});
+        });
     });
     
     router.post("/planrepas/", (req: Request, res: Response, _: NextFunction) => {
-      this.databaseService.addPlanRepas(req.body).then((result: pg.QueryResult) => res.json(result.rows));
+      this.databaseService.addPlanRepas(req.body)
+        .then(() => res.json({message: 'Le plan à bien été rajouté'}))
+        .catch((e: Error) => {
+          console.log(e.message);
+          res.json({message: e.message});
+        });
     });
 
     router.put("/planrepas/:id", (req: Request, res: Response, _: NextFunction) => {
-        this.databaseService.editPlanRepas(req.body, Number(req.params.id)).then((result: pg.QueryResult) => { res.json(result.rowCount);})
+        this.databaseService.editPlanRepas(req.body, Number(req.params.id))
+          .then((result: pg.QueryResult) => res.json(result.rowCount))
           .catch((e: Error) => {
-            console.error(e.stack);
-            res.json(-1);
+            console.error(e.message);
+            res.json({message: e.message});
           });
       }
     );

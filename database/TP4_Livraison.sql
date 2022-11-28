@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS "Telephone"
     numeroclient integer NOT NULL,
     PRIMARY KEY (numerotelephone, numeroclient),
     FOREIGN KEY (numeroclient) REFERENCES "Client" (numeroclient) ON DELETE CASCADE
+
 );
 
 CREATE TABLE IF NOT EXISTS "Planrepas"
@@ -42,13 +43,13 @@ CREATE TABLE IF NOT EXISTS "Planrepas"
     numeroplan serial NOT NULL,
     categorie VARCHAR(15) NOT NULL,
     frequence integer NOT NULL,
-    CONSTRAINT frequence CHECK (frequence > 0)
+    CONSTRAINT frequence CHECK (frequence > 0),
     nbpersonnes integer NOT NULL,
-    CONSTRAINT nbpersonnes CHECK (nbpersonnes > 0)
+    CONSTRAINT nbpersonnes CHECK (nbpersonnes > 0),
     nbcalories integer NOT NULL,
-    CONSTRAINT nbcalories CHECK (nbcalories > 0)
+    CONSTRAINT nbcalories CHECK (nbcalories > 0),
     prix numeric NOT NULL,
-    CONSTRAINT prix CHECK (prix > 0)
+    CONSTRAINT prix CHECK (prix > 0),
     numerofournisseur integer NOT NULL,
     PRIMARY KEY (numeroplan),
     FOREIGN KEY (numerofournisseur) REFERENCES "Fournisseur" (numerofournisseur) ON DELETE CASCADE
@@ -85,7 +86,7 @@ CREATE TABLE IF NOT EXISTS "Abonner"
     numeroclient integer NOT NULL,
     numeroplan integer NOT NULL,
     duree numeric NOT NULL,
-    CONSTRAINT duree CHECK (duree > 0)
+    CONSTRAINT duree CHECK (duree > 0),
     PRIMARY KEY (numeroclient, numeroplan),
     FOREIGN KEY (numeroclient) REFERENCES "Client" (numeroclient) ON DELETE CASCADE,
     FOREIGN KEY (numeroplan) REFERENCES "Planrepas" (numeroplan) ON DELETE CASCADE
@@ -95,7 +96,7 @@ CREATE TABLE IF NOT EXISTS "Contenir"
 (
     numerokitrepas integer NOT NULL,
     numeroingredient integer NOT NULL,
-   PRIMARY KEY (numerokitrepas, numeroingredient),
+    PRIMARY KEY (numerokitrepas, numeroingredient),
     FOREIGN KEY (numeroingredient) REFERENCES "Ingredient" (numeroingredient) ON DELETE CASCADE,
     FOREIGN KEY (numerokitrepas) REFERENCES "Kitrepas" (numerokitrepas) ON DELETE CASCADE
 );
@@ -105,8 +106,8 @@ CREATE TABLE IF NOT EXISTS "Etape"
     numerokitrepas integer NOT NULL,
     descriptionetape VARCHAR(255) NOT NULL,
     dureeetape numeric NOT NULL,
-    CONSTRAINT dureeetape CHECK (dureeetape > 0)
-    etrecomposéede VARCHAR(25) NOT NULL,
+    CONSTRAINT dureeetape CHECK (dureeetape > 0),
+    etrecomposeede VARCHAR(25),
     PRIMARY KEY (numerokitrepas),
     FOREIGN KEY (numerokitrepas) REFERENCES "Kitrepas" (numerokitrepas) ON DELETE CASCADE
 );
@@ -114,7 +115,7 @@ CREATE TABLE IF NOT EXISTS "Etape"
 CREATE TABLE IF NOT EXISTS "Famille"
 (
     numeroplan integer NOT NULL,
-    PRIMARY KEY (numeroplan) NOT NULL,
+    PRIMARY KEY (numeroplan),
     FOREIGN KEY (numeroplan) REFERENCES "Planrepas" (numeroplan) ON DELETE CASCADE
 );
 
@@ -122,7 +123,7 @@ CREATE TABLE IF NOT EXISTS "Facile"
 (
     numeroplan integer NOT NULL,
     nbingredients integer NOT NULL,
-    CONSTRAINT nbingredients CHECK (nbingredients > 0)
+    CONSTRAINT nbingredients CHECK (nbingredients > 0),
     PRIMARY KEY (numeroplan),
     FOREIGN KEY (numeroplan) REFERENCES "Famille" (numeroplan) ON DELETE CASCADE
 );
@@ -139,8 +140,8 @@ CREATE TABLE IF NOT EXISTS "Rapide"
 (
     numeroplan integer NOT NULL,
     tempsdepreparation numeric NOT NULL,
-    CONSTRAINT tempsdepreparation CHECK (tempsdepreparation > 0)
-   PRIMARY KEY (numeroplan),
+    CONSTRAINT tempsdepreparation CHECK (tempsdepreparation > 0),
+    PRIMARY KEY (numeroplan),
     FOREIGN KEY (numeroplan) REFERENCES "Famille" (numeroplan) ON DELETE CASCADE
 );
 

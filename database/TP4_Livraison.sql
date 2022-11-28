@@ -162,6 +162,7 @@ INSERT INTO "Fournisseur" (numerofournisseur, adressefournisseur) VALUES (DEFAUL
 INSERT INTO "Fournisseur" VALUES (DEFAULT, 'QC Transport', '2017 boulevard Produit');
 INSERT INTO "Fournisseur" VALUES (DEFAULT, 'AB Transport', '164 chemin Corbeau');
 INSERT INTO "Fournisseur" VALUES (DEFAULT, 'Benjamin', 'NDG');
+INSERT INTO "Fournisseur" VALUES (DEFAULT, 'IGA', '1 chemin Volaille');
 
 INSERT INTO "Telephone" VALUES ('4509876543', 1);
 INSERT INTO "Telephone" VALUES ('5141234567', 2);
@@ -174,6 +175,7 @@ INSERT INTO "Planrepas" VALUES (DEFAULT, 'Menu salades', 3, 5, 400, 68.79, 2);
 INSERT INTO "Planrepas" VALUES (DEFAULT, 'Menu vert', 3, 4, 400, 58.79, 4);
 INSERT INTO "Planrepas" VALUES (DEFAULT, 'cétogène', 3, 5, 750, 57.75, 1);
 INSERT INTO "Planrepas" VALUES (DEFAULT, 'Comfort food', 4, 4, 600, 47.99, 5);
+INSERT INTO "Planrepas" VALUES (DEFAULT, 'Drole', 4, 4, 600, 12501, 6);
 
 INSERT INTO "Kitrepas" VALUES (DEFAULT, 'Pizzaghetti sauce bolognaise', 1);
 INSERT INTO "Kitrepas" VALUES (DEFAULT, 'Ramen mega spicy', 2);

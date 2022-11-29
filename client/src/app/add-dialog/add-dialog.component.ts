@@ -48,6 +48,7 @@ export class AddDialogComponent implements OnInit {
       }
     });
   }
+
   addPlan(): void {
     const newPlan : PlanRepas = {
       numeroplan: this.data.numeroplan,
@@ -58,8 +59,12 @@ export class AddDialogComponent implements OnInit {
       prix: this.data.prix,
       numerofournisseur: Number(this.data.numerofournisseur.toString()[0])
     } 
-    if (this.data.nbcalories < 0 || this.data.prix < 0) {
-      this.openSnackBar("Vous ne pouvez pas rentrer de valeur négative. Veuillez réessayer.");
+    if (this.data.nbcalories <= 0 || this.data.prix <= 0) {
+      this.openSnackBar("Vous devez entrer une valeur supérieure à 0. Veuillez réessayer.");
+      return;
+    }
+    if ((this.data.nbcalories - Math.floor(this.data.nbcalories)) !== 0) {
+      this.openSnackBar("Vous devez entrer un nombre entier. Veuillez réessayer.");
       return;
     }
     this.communicationService.getAllPlansRepas().subscribe((data: PlanRepas[]) => {

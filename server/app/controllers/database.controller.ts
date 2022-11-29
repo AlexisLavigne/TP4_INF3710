@@ -47,7 +47,19 @@ export class DatabaseController {
     );
 
     router.get("/fournisseurs", (req: Request, res: Response, _: NextFunction) => {
-      this.databaseService.getAllFournisseurs().then((result: pg.QueryResult) => res.json(result.rows));
+      this.databaseService.getAllFournisseurs().then((result: pg.QueryResult) => res.json(result.rows))
+      .catch((e: Error) => {
+        console.error(e.message);
+        res.json({message: e.message});
+      });;
+    });
+
+    router.get("/fournisseur/:id", (req: Request, res: Response, _: NextFunction) => {
+      this.databaseService.getFournisseur(Number(req.params.id)).then((result: pg.QueryResult) => res.json(result.rows))
+      .catch((e: Error) => {
+        console.error(e.message);
+        res.json({message: e.message});
+      });;
     });
 
     return router;

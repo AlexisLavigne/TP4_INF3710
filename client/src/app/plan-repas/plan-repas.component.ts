@@ -43,7 +43,7 @@ export class PlanRepasComponent implements OnInit {
         nbpersonnes: 4, 
         nbcalories: 500,
         prix: 49.99,
-        numerofournisseur: 3,
+        numerofournisseur: "2 - Miam et Cie",
       },
     });
     dialogRef.afterClosed().subscribe(result => {

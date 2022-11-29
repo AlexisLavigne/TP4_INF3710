@@ -45,6 +45,7 @@ export class EditDialogComponent implements OnInit {
       for (let plan of plans) if (!(this.categories.includes(plan.categorie))) this.categories.push(plan.categorie);
     });
   }
+  
   openSnackBar(message: string): void {
     this.snackBar.open(SnackBarComponent, {
       width: '400px',
@@ -64,8 +65,12 @@ export class EditDialogComponent implements OnInit {
       prix: this.data.prix,
       numerofournisseur: Number(this.data.numerofournisseur.toString()[0])
     } 
-    if (this.data.nbcalories < 0 || this.data.prix < 0) {
-      this.openSnackBar("Vous ne pouvez pas rentrer de valeur négative. Veuillez réessayer.");
+    if (this.data.nbcalories <= 0 || this.data.prix <= 0) {
+      this.openSnackBar("Vous devez entrer un nombre supérieur à 0. Veuillez réessayer.");
+      return;
+    }
+    if ((this.data.nbcalories - Math.floor(this.data.nbcalories)) !== 0) {
+      this.openSnackBar("Vous devez entrer un nombre entier. Veuillez réessayer.");
       return;
     }
     this.communicationService.getAllPlansRepas().subscribe((data: PlanRepas[]) => {

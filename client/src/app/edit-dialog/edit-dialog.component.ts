@@ -12,7 +12,7 @@ export interface DialogData {
   nbpersonnes: number;
   nbcalories: number;
   prix: number;
-  numerofournisseur: number;
+  numerofournisseur: any;
 }
 
 @Component({
@@ -38,8 +38,10 @@ export class EditDialogComponent implements OnInit {
     this.fournisseurs = [];
     this.categories = [];
     this.communicationService.getAllFournisseurs().subscribe((fournisseurs: Fournisseur[]) => {
-      for (let fournisseur of fournisseurs)
+      for (let fournisseur of fournisseurs){
         this.fournisseurs.push(fournisseur.numerofournisseur + " - " + fournisseur.nomfournisseur);
+        if (this.data.numerofournisseur === fournisseur.numerofournisseur) this.data.numerofournisseur += " - " + fournisseur.nomfournisseur;
+      }
     });
     this.communicationService.getAllPlansRepas().subscribe((plans: PlanRepas[]) => {
       for (let plan of plans) if (!(this.categories.includes(plan.categorie))) this.categories.push(plan.categorie);

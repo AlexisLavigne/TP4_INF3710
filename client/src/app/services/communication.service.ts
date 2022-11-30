@@ -56,12 +56,6 @@ export class CommunicationService {
       .pipe(catchError(this.handleError<any>("getAllFournisseurs")));
   }
 
-  async getFournisseur(id: number): Promise<Observable<any>> {
-    return this.http
-      .get<any>(this.BASE_URL + "/fournisseur/" + id)
-      .pipe(catchError(this.handleError<any>("getFournisseur")));
-  }
-
   private handleError<T>(
     request: string,
     result?: T

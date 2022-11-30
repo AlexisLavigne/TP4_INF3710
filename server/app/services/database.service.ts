@@ -85,11 +85,4 @@ export class DatabaseService {
     return res;
   }
 
-  async getFournisseur(id: number): Promise<pg.QueryResult> {
-    const client = await this.pool.connect();
-    const queryText: string = `SELECT nomfournisseur FROM "Fournisseur" WHERE numerofournisseur = ${id};`;
-    const res = await client.query(queryText);
-    client.release();
-    return res;
-  }
 }

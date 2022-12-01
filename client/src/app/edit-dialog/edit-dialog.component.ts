@@ -36,7 +36,7 @@ export class EditDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.fournisseurs = [];
-    this.categories = [];
+    this.categories = ['Italien', 'Oriental', 'Fruits de mer', 'Japonais', 'Menu salades', 'Menu vert', 'cétogène', 'Comfort food'];
     this.communicationService.getAllFournisseurs().subscribe((fournisseurs: Fournisseur[]) => {
       for (let fournisseur of fournisseurs){
         this.fournisseurs.push(fournisseur.numerofournisseur + " - " + fournisseur.nomfournisseur);

@@ -4,11 +4,6 @@
 	Laurent Faucher
 **************************************************************/
 
--- DROP SCHEMA IF EXISTS jardinCommMR CASCADE;
--- CREATE SCHEMA jardinCommMR;
-
--- SET search_path = jardinCommMR;
-
 CREATE TABLE IF NOT EXISTS "Client"
 (
     numeroclient serial NOT NULL,
@@ -96,7 +91,7 @@ CREATE TABLE IF NOT EXISTS "Contenir"
 (
     numerokitrepas integer NOT NULL,
     numeroingredient integer NOT NULL,
-    PRIMARY KEY (numerokitrepas, numeroingredient),
+   PRIMARY KEY (numerokitrepas, numeroingredient),
     FOREIGN KEY (numeroingredient) REFERENCES "Ingredient" (numeroingredient) ON DELETE CASCADE,
     FOREIGN KEY (numerokitrepas) REFERENCES "Kitrepas" (numerokitrepas) ON DELETE CASCADE
 );
@@ -161,7 +156,7 @@ INSERT INTO "Fournisseur" VALUES (DEFAULT, 'Miam et Cie', '4001 rue Legume');
 INSERT INTO "Fournisseur" (numerofournisseur, adressefournisseur) VALUES (DEFAULT, '90 rue Viande');
 INSERT INTO "Fournisseur" VALUES (DEFAULT, 'QC Transport', '2017 boulevard Produit');
 INSERT INTO "Fournisseur" VALUES (DEFAULT, 'AB Transport', '164 chemin Corbeau');
-INSERT INTO "Fournisseur" VALUES (DEFAULT, 'Benjamin', 'NDG');
+INSERT INTO "Fournisseur" VALUES (DEFAULT, 'Benjamin', '123 rue Oxford, NDG');
 INSERT INTO "Fournisseur" VALUES (DEFAULT, 'IGA', '1 chemin Volaille');
 
 INSERT INTO "Telephone" VALUES ('4509876543', 1);
